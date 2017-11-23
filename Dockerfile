@@ -14,7 +14,9 @@ RUN apk --update --no-cache add x11vnc xvfb openbox xfce4-terminal supervisor su
 && echo "alpine:alpine" | /usr/sbin/chpasswd \
 && echo "alpine    ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
 && rm -rf /tmp/* /var/cache/apk/*
-
+COPY entrypoint.sh /usr/sbin/entrypoint.sh
+COPY check.sh /home/alpine/check.sh
+COPY reset.sh /home/alpine/reset.sh
 ADD etc /etc
 WORKDIR /home/alpine
 EXPOSE 22 5900 3389
