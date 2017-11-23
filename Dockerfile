@@ -8,7 +8,7 @@ RUN apk upgrade --no-cache \
     && rm -rf /var/cache/apk/*
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-RUN apk --update --no-cache add x11vnc xvfb openbox xfce4-terminal supervisor sudo dbus firefox \
+RUN apk --update --no-cache add x11vnc xvfb openbox xfce4-terminal supervisor sudo dbus \
 && addgroup alpine \
 && adduser  -G alpine -s /bin/sh -D alpine \
 && echo "alpine:alpine" | /usr/sbin/chpasswd \
