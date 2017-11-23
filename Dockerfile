@@ -8,7 +8,7 @@ RUN apk upgrade --no-cache \
     && rm -rf /var/cache/apk/*
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-RUN apk --update --no-cache add x11vnc xvfb openbox xfce4-terminal supervisor sudo dbus \
+RUN apk --update --no-cache add x11vnc xvfb xrdp alpine-desktop xfce4 ttf-freefont supervisor sudo openssl dbus \
 && addgroup alpine \
 && adduser  -G alpine -s /bin/sh -D alpine \
 && echo "alpine:alpine" | /usr/sbin/chpasswd \
@@ -18,6 +18,10 @@ COPY entrypoint.sh /usr/sbin/entrypoint.sh
 COPY check.sh /home/alpine/check.sh
 COPY reset.sh /home/alpine/reset.sh
 ADD etc /etc
+RUN xrdp-keygen xrdp auto
+RUN sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini \
+&& sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
+
 WORKDIR /home/alpine
 EXPOSE 22 5900 3389
 USER alpine
