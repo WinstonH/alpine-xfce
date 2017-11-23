@@ -8,7 +8,7 @@ RUN apk upgrade --no-cache \
     && rm -rf /var/cache/apk/*
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-RUN apk --update --no-cache add x11vnc xvfb xrdp alpine-desktop xfce4 ttf-freefont supervisor sudo openssl dbus \
+RUN apk --update --no-cache add x11vnc xvfb xrdp xauth alpine-desktop xfce4 ttf-freefont supervisor sudo openssl openssh dbus \
 && addgroup alpine \
 && adduser  -G alpine -s /bin/sh -D alpine \
 && echo "alpine:alpine" | /usr/sbin/chpasswd \
